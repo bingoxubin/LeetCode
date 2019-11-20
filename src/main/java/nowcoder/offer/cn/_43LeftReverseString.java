@@ -1,0 +1,27 @@
+//左旋转字符串
+//汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。
+// 对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。是不是很简单？OK，搞定它！
+
+//若str的长度小于等于1，直接返回；
+// 否则，将n对str的长度取模得到count，将下标为count开始的字符串拼接上前面的count个字符后返回。
+package nowcoder.offer.cn;
+
+/**
+ * @author xumaosheng
+ * @date 2019/9/10 0:54
+ */
+public class _43LeftReverseString {
+	public static void main(String[] args) {
+
+	}
+
+	public class Solution {
+		public String LeftRotateString(String str, int n) {
+			if (str.length() <= 1) {    //注意，str=null,返回null;str="",返回""
+				return str;
+			}
+			int count = n % str.length();
+			return str.substring(count) + str.substring(0, count);
+		}
+	}
+}
