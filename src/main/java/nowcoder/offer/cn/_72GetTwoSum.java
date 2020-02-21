@@ -2,7 +2,7 @@ package nowcoder.offer.cn;
 
 /**
  * @author xumaosheng
- * @date 2019/9/10 1:10
+ * @date 2019/12/19 16:48
  */
-public class _56 {
+public class _72GetTwoSum {
 }

@@ -2,7 +2,7 @@ package nowcoder.offer.cn;
 
 /**
  * @author xumaosheng
- * @date 2019/9/10 1:20
+ * @date 2019/12/19 17:15
  */
-public class _65 {
+public class _77ReverseList {
 }
