@@ -21,13 +21,27 @@ package nowcoder.offer.cn;
 
 import java.util.ArrayList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:51
- */
 public class _41ContinuousNumberSum {
-	public static void main(String[] args) {
-
+	public class Solution {
+		public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+			ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+			if (sum == 1) return list;
+			int n = (int) (Math.ceil((Math.sqrt(8 * sum + 1) - 1) / 2));
+			int tmp = 0;
+			int num = 0;
+			for (int i = n; i > 1; i--) {
+				tmp = (i + 1) * i / 2;
+				if ((sum - tmp) % i == 0) {
+					ArrayList<Integer> arrayList = new ArrayList<Integer>();
+					num = (sum - tmp) / i;
+					for (int a = 1; a <= i; a++) {
+						arrayList.add(num + a);
+					}
+					list.add(arrayList);
+				}
+			}
+			return list;
+		}
 	}
 
 	public class Solution1 {

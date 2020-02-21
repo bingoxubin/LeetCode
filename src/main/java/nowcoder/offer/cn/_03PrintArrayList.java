@@ -13,41 +13,31 @@
 
 package nowcoder.offer.cn;
 
-import javax.lang.model.element.VariableElement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Stack;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:11
- */
 public class _03PrintArrayList {
-	public static void main(String[] args) {
-		ListNode ln1 = new _03PrintArrayList().new ListNode(1);
-		ListNode ln2 = new _03PrintArrayList().new ListNode(2);
-		ListNode ln3 = new _03PrintArrayList().new ListNode(3);
-		ListNode ln4 = new _03PrintArrayList().new ListNode(4);
-		ln1.next = ln2;
-		ln2.next = ln3;
-		ln3.next = ln4;
-
-		Solution1 solution1 = new _03PrintArrayList().new Solution1();
-		Solution2 solution2 = new _03PrintArrayList().new Solution2();
-		Solution3 solution3 = new _03PrintArrayList().new Solution3();
-		ArrayList<Integer> list = solution3.printListFromTailToHead(ln1);
-		Iterator<Integer> it = list.iterator();
-		while (it.hasNext()) {
-			System.out.print(it.next() + " ");
-		}
-	}
-
 	public class ListNode {
 		int val;
 		ListNode next = null;
 
 		ListNode(int val) {
 			this.val = val;
+		}
+	}
+
+	public class Solution {
+		public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+			ArrayList<Integer> temp = new ArrayList();
+			while (listNode != null) {
+				temp.add(listNode.val);
+				listNode = listNode.next;
+			}
+			ArrayList<Integer> result = new ArrayList();
+			for (int i = temp.size() - 1; i >= 0; i--) {
+				result.add(temp.get(i));
+			}
+			return result;
 		}
 	}
 

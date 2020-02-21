@@ -4,5 +4,34 @@
 // 因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
 package nowcoder.offer.cn;
 
-public class _65 {
+public class _65PathInMatrix {
+	public class Solution {
+		public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
+			int[] result = new int[matrix.length];
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					if (hasPath(matrix, rows, cols, str, i, j, 0, result)) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+		public boolean hasPath(char[] matrix, int rows, int cols, char[] str, int x, int y, int k, int[] result) {
+			int index = x * cols + y;
+			if (x < 0 || x >= rows || y < 0 || y >= cols || result[index] == 1 || str[k] != matrix[index]) {
+				return false;
+			}
+			result[index] = 1;
+			if (k == str.length - 1) {
+				return true;
+			}
+			if (hasPath(matrix, rows, cols, str, x - 1, y, k + 1, result) || hasPath(matrix, rows, cols, str, x + 1, y, k + 1, result) || hasPath(matrix, rows, cols, str, x, y - 1, k + 1, result) || hasPath(matrix, rows, cols, str, x, y + 1, k + 1, result)) {
+				return true;
+			}
+			result[index] = 0;
+			return false;
+		}
+	}
 }

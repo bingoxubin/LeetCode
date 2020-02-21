@@ -19,16 +19,7 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:14
- */
 public class _18BinaryTreeMirror {
-
-	public static void main(String[] args) {
-		//TODO
-	}
-
 	public class TreeNode {
 		int val = 0;
 		TreeNode left = null;
@@ -40,6 +31,18 @@ public class _18BinaryTreeMirror {
 	}
 
 	public class Solution {
+		public void Mirror(TreeNode root) {
+			if (root == null) return;
+			if (root.left == null && root.right == null) return;
+			TreeNode temp = root.left;
+			root.left = root.right;
+			root.right = temp;
+			Mirror(root.left);
+			Mirror(root.right);
+		}
+	}
+
+	public class Solution1 {
 		public void Mirror(TreeNode root) {
 			TreeNode temp;
 			if (root != null) {

@@ -14,15 +14,7 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:33
- */
 public class _26SearchTreeToBothwayList {
-	public static void main(String[] args) {
-
-	}
-
 	public class TreeNode {
 		int val = 0;
 		TreeNode left = null;

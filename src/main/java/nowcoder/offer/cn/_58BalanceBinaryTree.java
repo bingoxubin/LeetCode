@@ -5,10 +5,6 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:12
- */
 public class _58BalanceBinaryTree {
 	public class TreeNode {
 		int val = 0;
@@ -17,23 +13,9 @@ public class _58BalanceBinaryTree {
 
 		public TreeNode(int val) {
 			this.val = val;
-
 		}
-
 	}
 
-	/*
-		思路：
-			若为空树，返回true。
-			否则：
-				判断根节点的左右子树(left和right)是否对称。方法如下：
-				1.若left为空，right为空-->true
-				2.若left为空，right非空-->false
-				3.若left非空，right为空-->false
-				4.若left非空，right非空
-					1.若left.val != left.val-->false
-					2.递归判断：左子树的左子树是否等于右子树的右子树 && 左子树的右子树是否等于右子树的左子树
-	 */
 	public class Solution {
 		boolean isSymmetrical(TreeNode pRoot) {
 			//1.空树

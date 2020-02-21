@@ -16,18 +16,18 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:41
- */
 public class _10RectangleCover {
-	public static void main(String[] args) {
-		Solution solution = new _10RectangleCover().new Solution();
-		int result = solution.RectCover(4);
-		System.out.println(result);
+	public class Solution {
+		public int RectCover(int target) {
+			//1 2 3 5
+			if (target == 1) return 1;
+			if (target == 2) return 2;
+			if (target >= 3) return RectCover(target - 1) + RectCover(target - 2);
+			return 0;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public int RectCover(int target) {
 			if (target <= 2) {
 				return target;

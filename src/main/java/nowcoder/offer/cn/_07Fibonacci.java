@@ -11,18 +11,15 @@
 
 package nowcoder.offer.cn;
 
-import javax.sound.midi.Soundbank;
-
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:31
- */
 public class _07Fibonacci {
-	public static void main(String[] args) {
-		Solution1 solution1 = new _07Fibonacci().new Solution1();
-		System.out.println(solution1.Fibonacci(6));
-		for (int i = 0; i < 7; i++) {
-			System.out.print(solution1.Fibonacci(i) + " ");
+	public class Solution {
+		public int Fibonacci(int n) {
+			//0 1 1 2 3
+			if (n == 0) return 0;
+			if (n == 1) return 1;
+			if (n == 2) return 1;
+			if (n >= 3) return Fibonacci(n - 2) + Fibonacci(n - 1);
+			return 0;
 		}
 	}
 
@@ -71,6 +68,23 @@ public class _07Fibonacci {
 				pre = last - pre;
 			}
 			return last;
+		}
+	}
+
+	public class Solution4 {
+		public int Fibonacci(int n) {
+			int pre = 1;
+			int last = 1;
+			int result = 0;
+			if (n <= 0) return 0;
+			if (n <= 2) return 1;
+			while (n > 2) {
+				n--;
+				result = pre + last;
+				pre = last;
+				last = result;
+			}
+			return result;
 		}
 	}
 }

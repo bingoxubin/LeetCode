@@ -14,19 +14,28 @@ package nowcoder.offer.cn;
 
 import java.util.Stack;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:21
- */
 public class _21StackSequence {
-	public static void main(String[] args) {
-		Solution solution = new _21StackSequence().new Solution();
-		int[] arr1 = {1, 2, 3, 4, 5};
-		int[] arr2 = {4, 5, 3, 1, 2};
-		System.out.println(solution.IsPopOrder(arr1, arr2));
+	public class Solution {
+		public boolean IsPopOrder(int[] pushA, int[] popA) {
+			boolean flag = false;
+			if (pushA.length != popA.length) return false;
+			Stack<Integer> stack = new Stack<Integer>();
+			int temp = 0;
+			for (int i = 0; i < pushA.length; i++) {
+				stack.push(pushA[i]);
+				while (!stack.isEmpty() && stack.peek() == popA[temp]) {
+					stack.pop();
+					temp++;
+				}
+			}
+			if (stack.isEmpty()) {
+				flag = true;
+			}
+			return flag;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public boolean IsPopOrder(int[] pushA, int[] popA) {
 			Stack stack = new Stack();
 			int in = 0, out = 0;

@@ -7,19 +7,18 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:29
- */
 public class _06RotateArrayMin {
-	public static void main(String[] args) {
-		int[] arr = {2, 3, 4, 5, 6, 8, 0, 1};
-		Solution solution1 = new _06RotateArrayMin().new Solution();
-		int i = solution1.minNumberInRotateArray(arr);
-		System.out.println(i);
+	public class Solution {
+		public int minNumberInRotateArray(int[] array) {
+			if (array.length == 0) return 0;
+			int i = 0;
+			while (true) {
+				if (array[0] > array[i++]) return array[i - 1];
+			}
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public int minNumberInRotateArray(int[] array) {
 			if (array.length == 0 || array == null) {
 				return 0;

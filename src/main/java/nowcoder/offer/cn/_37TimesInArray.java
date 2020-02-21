@@ -6,10 +6,6 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:43
- */
 public class _37TimesInArray {
 	public static void main(String[] args) {
 

@@ -17,13 +17,25 @@ package nowcoder.offer.cn;
 import java.util.Arrays;
 import java.util.HashMap;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:38
- */
 public class _28InArrayAppearHalf {
-	public static void main(String[] args) {
-
+	public class Solution {
+		public int MoreThanHalfNum_Solution(int[] array) {
+			int len = array.length;
+			if (len < 1) {
+				return 0;
+			}
+			int count = 0;
+			Arrays.sort(array);
+			int num = array[len / 2];
+			for (int i = 0; i < len; i++) {
+				if (num == array[i])
+					count++;
+			}
+			if (count <= (len / 2)) {
+				num = 0;
+			}
+			return num;
+		}
 	}
 
 	public class Solution1 {

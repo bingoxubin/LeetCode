@@ -8,13 +8,51 @@ package nowcoder.offer.cn;
 
 import java.util.ArrayList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:17
- */
 public class _19ClockwisePrintMatrix {
-	public static void main(String[] args) {
-		//TODO
+	public class Solution {
+		public ArrayList<Integer> printMatrix(int[][] matrix) {
+			ArrayList result = new ArrayList();
+			if (matrix.length == 0 || matrix == null) return result;
+			int up = 0;
+			int down = matrix.length - 1;
+			int left = 0;
+			int right = matrix[0].length - 1;
+			while (true) {
+				//向右
+				for (int i = left; i <= right; i++) {
+					result.add(matrix[up][i]);
+				}
+				if (++up > down) {
+					break;
+				}
+				//向下
+				for (int i = up; i <= down; i++) {
+					result.add(matrix[i][right]);
+				}
+				if (--right < left) {
+					break;
+				}
+				//向左
+				for (int i = right; i >= left; i--) {
+					result.add(matrix[down][i]);
+				}
+				if (--down < up) {
+					break;
+				}
+				//向上
+				for (int i = down; i >= up; i--) {
+					result.add(matrix[i][left]);
+				}
+				if (++left > right) {
+					break;
+				}
+			}
+			return result;
+			// 1 2  3  4
+			// 5 6  7  8
+			// 9 10 11 12
+			//13 14 15 16
+		}
 	}
 
 	public class Solution1 {

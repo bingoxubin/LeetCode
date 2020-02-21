@@ -7,23 +7,28 @@
 
 package nowcoder.offer.cn;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-/**
- * @author xumaosheng
- * @date 2019/9/9 22:59
- */
 public class _13AdjustArrayOrder {
-	public static void main(String[] args) {
-		Solution1 solution1 = new _13AdjustArrayOrder().new Solution1();
-		Solution2 solution2 = new _13AdjustArrayOrder().new Solution2();
-		Solution3 solution3 = new _13AdjustArrayOrder().new Solution3();
-		int[] arr = {1, 2, 3, 4, 5, 6, 7, 8};
-		solution1.reOrderArray(arr);
-		solution2.reOrderArray(arr);
-		solution3.reOrderArray(arr);
+	public class Solution {
+		public void reOrderArray(int[] array) {
+			//1 2 3 4 5 6 7
+			//1 3 5 7 2 4 6
+			int[] result = new int[array.length];
+			int j = 0;
+			int m = 0;
+			for (int i = 0; i < array.length; i++) {
+				if (array[i] % 2 == 1) {
+					result[j++] = array[i];
+				}
+			}
+			for (int i = 0; i < array.length; i++) {
+				if (array[i] % 2 == 0) {
+					result[j++] = array[i];
+				}
+			}
+			for (int temp = 0; temp < result.length; temp++) {
+				array[m++] = result[temp];
+			}
+		}
 	}
 
 	public class Solution1 {
@@ -49,48 +54,32 @@ public class _13AdjustArrayOrder {
 
 	public class Solution2 {
 		public void reOrderArray(int[] array) {
-			List l = new ArrayList();
-			for (int i = 0; i <= array.length - 1; i++) {
-				if (array[i] % 2 != 0) {
-					l.add(array[i]);
-				}
-			}
-
-			for (int i = 0; i <= array.length - 1; i++) {
-				if (array[i] % 2 == 0) {
-					l.add(array[i]);
-
-				}
-			}
-			for (int i = 0; i <= l.size() - 1; i++) {
-				array[i] = (int) l.get(i);
-			}
+			int index = -1;
+			int temp = 0;
+			int j = 0;
 			for (int i = 0; i < array.length; i++) {
-				System.out.print(array[i] + ",");
+				if (array[i] % 2 == 1) {
+					index++;
+					j = i;
+					temp = array[i];
+					while (j > index) {
+						array[j] = array[j - 1];
+						j--;
+					}
+					array[index] = temp;
+				}
 			}
 		}
 	}
 
-	public class Solution3 {
-		public void reOrderArray(int[] array) {
-			int length = array.length;
-			int[] newarray = new int[length];
-			int temp = 0;
-			for (int i = 0; i < array.length; i++) {
-				if ((array[i] & 1) == 1) {
-					newarray[temp++] = array[i];
-				}
-			}
-			for (int i = 0; i < array.length; i++) {
-				if ((array[i] & 1) == 0) {
-					newarray[temp++] = array[i];
-				}
-			}
-			System.out.println();
-			for (int i = 0; i < newarray.length; i++) {
-				System.out.print(newarray[i] + ",");
-			}
+	public static void main(String[] args) {
+		Solution2 result = new _13AdjustArrayOrder().new Solution2();
+		int[] arr = {1, 2, 3, 4, 5, 6, 7, 8};
+		result.reOrderArray(arr);
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
 		}
+
 	}
 }
 

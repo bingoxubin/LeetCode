@@ -1,4 +1,5 @@
 //按之字形顺序打印二叉树
+//请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
 
 package nowcoder.offer.cn;
 
@@ -6,10 +7,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:13
- */
 public class _59PrintBinaryTree {
 	public class TreeNode {
 		int val = 0;
@@ -20,72 +17,42 @@ public class _59PrintBinaryTree {
 			this.val = val;
 
 		}
-
 	}
 
-	/*
-		思路：
-			BFS广度优先搜索遍历
-			若为空树，直接返回。
-			否则
-				将根节点进队queue，计数器start（代表已打印节点）置0，每层节点end数置1。（第一层只有一个节点）
-				当队列不为空时，执行下面的循环：
-					1.队首元素出队，打印队该元素，计数器start加1。
-					2.若该元素有左孩子或右孩子，将它们进队。
-					3.如果已打印节点数start是否等于当前层的节点数end，则打印回车行，并重置计数器start和每层节点数end,
-					注意每层节点数end等于当前队列queue的大小。
-
-			版本1：利用布尔变量isOddLayer记录当前层是否为奇数层，利用layer(ArrayList)存储每层的数据。
-				  若为奇数层，直接添加layer，翻转isOddLayer;
-				  否则，返回layer再添加，翻转isOddLayer；
-	*/
 	public class Solution {
 		public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
-			ArrayList<ArrayList<Integer>> lists = new ArrayList<ArrayList<Integer>>();
+			ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
 			if (pRoot == null) {
-				return lists;
+				return res;
 			}
-			Queue<TreeNode> queue = new LinkedList<>();
+			ArrayList<Integer> list;
+			Queue<TreeNode> queue = new LinkedList<TreeNode>();
+			int rows = 1;
 			queue.add(pRoot);
-			ArrayList<Integer> layer = new ArrayList<>();
-			boolean isOddLayer = true;
-			TreeNode temp = null;
-			int start = 0;
-			int end = 1;
 			while (!queue.isEmpty()) {
-				temp = queue.remove();
-				layer.add(temp.val);
-				start++;
-				if (temp.left != null) {
-					queue.add(temp.left);
-				}
-				if (temp.right != null) {
-					queue.add(temp.right);
-				}
-				if (start == end) {
-					if (isOddLayer) {
-						lists.add(layer);
-						isOddLayer = false;
+				list = new ArrayList();
+				int size = queue.size();
+				for (int i = 0; i < size; i++) {
+					TreeNode t = queue.poll();
+					if (rows % 2 == 0) {
+						list.add(0, t.val);
 					} else {
-						layer = reverseList(layer);
-						lists.add(layer);
-						isOddLayer = true;
+						list.add(t.val);
 					}
-					layer = new ArrayList<Integer>();
-					start = 0;
-					end = queue.size();
+					if (t.left != null) {
+						queue.offer(t.left);
+					}
+					if (t.right != null) {
+						queue.offer(t.right);
+					}
 				}
+				res.add(list);
+				rows++;
 			}
-			return lists;
-		}
+			return res;
 
-		private ArrayList<Integer> reverseList(ArrayList<Integer> list) {
-			ArrayList<Integer> result = new ArrayList<>();
-			for (int i = list.size() - 1; i >= 0; i--) {
-				result.add(list.get(i));
-			}
-			return result;
 		}
 
 	}
+
 }

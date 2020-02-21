@@ -3,33 +3,19 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:04
- */
 public class _02ReplaceString {
-	public static void main(String[] args) {
-		Solution solution = new _02ReplaceString().new Solution();
-		StringBuffer str = new StringBuffer("We Are Happy");
-		String result = solution.replaceSpace(str);
-		System.out.println(result);
-	}
-
 	public class Solution {
 		public String replaceSpace(StringBuffer str) {
-			String str1;
-			char[] cr = new String(str).toCharArray();
-			String result = "";
-			for (int i = 0; i < cr.length; i++) {
-				String temp = String.valueOf(cr[i]);
-				if (" ".equals(temp)) {
-					result += "%20";
+			char[] temp = str.toString().toCharArray();
+			StringBuilder result = new StringBuilder();
+			for (int i = 0; i < temp.length; i++) {
+				if (temp[i] == ' ') {
+					result.append("%20");
 				} else {
-					result += temp;
+					result.append(temp[i]);
 				}
 			}
-			return result;
+			return result.toString();
 		}
 	}
-
 }

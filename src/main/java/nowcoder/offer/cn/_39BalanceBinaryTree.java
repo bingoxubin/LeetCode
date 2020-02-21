@@ -12,15 +12,7 @@
 //版本2:由于版本1在判断上层节点时，会重复遍历下层节点，所以可以改为从下往上遍历，若不满足定义则返回结果不再判断。
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:46
- */
 public class _39BalanceBinaryTree {
-	public static void main(String[] args) {
-
-	}
-
 	public class TreeNode {
 		int val = 0;
 		TreeNode left = null;
@@ -28,6 +20,29 @@ public class _39BalanceBinaryTree {
 
 		public TreeNode(int val) {
 			this.val = val;
+		}
+	}
+
+	public class Solution {
+		public boolean IsBalanced_Solution(TreeNode root) {
+			if (root == null)
+				return true;
+
+			if (Math.abs(getHeight(root.left) - getHeight(root.right)) > 1)
+				return false;
+
+			return IsBalanced_Solution(root.left) && IsBalanced_Solution(root.right);
+
+		}
+
+		public int getHeight(TreeNode root) {
+			if (root == null)
+				return 0;
+			return max(getHeight(root.left), getHeight(root.right)) + 1;
+		}
+
+		private int max(int a, int b) {
+			return (a > b) ? a : b;
 		}
 	}
 

@@ -10,25 +10,44 @@ package nowcoder.offer.cn;
 
 import java.util.Stack;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:19
- */
 public class _20ContainMainStack {
-	public static void main(String[] args) {
-		Solution solution = new _20ContainMainStack().new Solution();
-		solution.push(2);
-		solution.push(4);
-		solution.push(9);
-		solution.push(1);
-		solution.push(7);
-		solution.push(6);
-		solution.push(5);
-		System.out.println(solution.min());
-		System.out.println(solution.top());
+	public class Solution {
+		Stack<Integer> stack1 = new Stack<Integer>();
+		Stack<Integer> stack2 = new Stack<Integer>();
+
+		public void push(int node) {
+			stack1.push(node);
+			if (stack2.size() == 0 || stack2.peek() >= node) {
+				stack2.push(node);
+			}
+			if (stack2.peek() < node) {
+				stack2.push(stack2.peek());
+			}
+		}
+
+		public void pop() {
+			if (stack1.size() > 0 && stack2.size() > 0) {
+				stack1.pop();
+				stack2.pop();
+			}
+		}
+
+		public int top() {
+			if (stack1.size() > 0) {
+				return stack1.peek();
+			}
+			return 0;
+		}
+
+		public int min() {
+			if (stack1.size() > 0 && stack2.size() > 0) {
+				return stack2.peek();
+			}
+			return 0;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		private Stack stack = new Stack();
 		private Stack minStack = new Stack();
 

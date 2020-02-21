@@ -6,16 +6,23 @@
 // 否则，将n对str的长度取模得到count，将下标为count开始的字符串拼接上前面的count个字符后返回。
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:54
- */
 public class _43LeftReverseString {
-	public static void main(String[] args) {
-
+	public class Solution {
+		public String LeftRotateString(String str, int n) {
+			if (str.length() == 0) {
+				return str;
+			}
+			StringBuffer buffer = new StringBuffer(str);
+			StringBuffer buffer1 = new StringBuffer(str);
+			StringBuffer buffer2 = new StringBuffer();
+			buffer.delete(0, n);
+			buffer1.delete(n, str.length());
+			buffer2.append(buffer.toString()).append(buffer1.toString());
+			return buffer2.toString();
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public String LeftRotateString(String str, int n) {
 			if (str.length() <= 1) {    //注意，str=null,返回null;str="",返回""
 				return str;

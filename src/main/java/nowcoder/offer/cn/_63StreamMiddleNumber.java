@@ -1,5 +1,6 @@
 //数据流中的中位数
-
+// 如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。
+// 如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。我们使用Insert()方法读取数据流，使用GetMedian()方法获取当前读取数据的中位数。
 //输入
 //
 // > 5,2,3,4,1,6,7,0,8
@@ -10,17 +11,7 @@ package nowcoder.offer.cn;
 
 import java.util.ArrayList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:19
- */
 public class _63StreamMiddleNumber {
-	/*
-    思路：
-        只要始终保持已有序列有序即可直接取出中位数。
-        插入时：先用二分查找找出当前数字应该放置在list的哪个位置，然后插入。
-        取出时：若list中元素的个数为偶数，则取出中间两个求平均值；若为奇数，则取出中间数。
-*/
 
 	public class Solution {
 		ArrayList<Integer> list = new ArrayList<Integer>();

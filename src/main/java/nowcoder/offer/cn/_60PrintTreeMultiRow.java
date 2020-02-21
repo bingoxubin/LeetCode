@@ -1,14 +1,10 @@
 //把二叉树打印成多行
+//从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
 package nowcoder.offer.cn;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Queue;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:15
- */
 public class _60PrintTreeMultiRow {
 
 	public class TreeNode {
@@ -18,58 +14,38 @@ public class _60PrintTreeMultiRow {
 
 		public TreeNode(int val) {
 			this.val = val;
-
 		}
-
 	}
 
-	/*
-		思路：
-			BFS广度优先搜索遍历
-			若为空树，直接返回。
-			否则
-				将根节点进队queue，计数器start（代表已打印节点）置0，每层节点end数置1。（第一层只有一个节点）
-				当队列不为空时，执行下面的循环：
-					1.队首元素出队，打印队该元素，计数器start加1。
-					2.若该元素有左孩子或右孩子，将它们进队。
-					3.如果已打印节点数start是否等于当前层的节点数end，则打印回车行，并重置计数器start和每层节点数end,
-					注意每层节点数end等于当前队列queue的大小。
-	 */
 	public class Solution {
 		ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
-			ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
-			ArrayList<Integer> layer = new ArrayList<Integer>();
-			//空树
-			if (pRoot == null) {
-				return list;
-			}
-			//非空树
-			Queue<TreeNode> queue = new LinkedList<TreeNode>();
-			queue.add(pRoot);
-			//记录已打印节点个数
-			int start = 0;
-			//记录每层节点数
-			int end = 1;
-			while (!queue.isEmpty()) {
-				TreeNode removeNode = queue.remove();
-				layer.add(removeNode.val);
-				start++;
-				if (removeNode.left != null) {
-					queue.add(removeNode.left);
+			ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
+			ArrayList<Integer> tmp = new ArrayList<Integer>();
+			LinkedList<TreeNode> q = new LinkedList<TreeNode>();
+			if (pRoot == null)
+				return ret;
+			q.add(pRoot);
+			int now = 1, next = 0;
+			while (!q.isEmpty()) {
+				TreeNode t = q.remove();
+				now--;
+				tmp.add(t.val);
+				if (t.left != null) {
+					q.add(t.left);
+					next++;
 				}
-				if (removeNode.right != null) {
-					queue.add(removeNode.right);
+				if (t.right != null) {
+					q.add(t.right);
+					next++;
 				}
-				//打印完一层
-				if (start == end) {
-					list.add(layer);
-					layer = new ArrayList<Integer>();
-					//重置每层节点数与计数器
-					start = 0;
-					end = queue.size();
+				if (now == 0) {
+					ret.add(new ArrayList<Integer>(tmp));
+					tmp.clear();
+					now = next;
+					next = 0;
 				}
 			}
-			return list;
+			return ret;
 		}
 	}
 }

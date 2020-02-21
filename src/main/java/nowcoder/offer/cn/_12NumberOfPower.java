@@ -13,15 +13,22 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:45
- */
 public class _12NumberOfPower {
-	public static void main(String[] args) {
-		Solution1 solution1 = new _12NumberOfPower().new Solution1();
-		double result = solution1.Power(1.413, 5);
-		System.out.println(result);
+	public class Solution {
+		public double Power(double base, int exponent) {
+			double result = 1.0;
+			while (exponent != 0) {
+				if (exponent < 0) {
+					result = result * (1.0 / base);
+					exponent++;
+				}
+				if (exponent > 0) {
+					result = result * base;
+					exponent--;
+				}
+			}
+			return result;
+		}
 	}
 
 	public class Solution1 {

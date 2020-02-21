@@ -1,39 +1,31 @@
 //二叉搜索树的第K个节点
+//给定一棵二叉搜索树，请找出其中的第k小的结点。例如， （5，3，7，2，4，6，8）    中，按结点数值大小顺序第三小结点的值为4。
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:17
- */
 public class _62BinarySearchTreeKNode {
-	public class TreeNode {
+	public static class TreeNode {
 		int val = 0;
 		TreeNode left = null;
 		TreeNode right = null;
 
 		public TreeNode(int val) {
 			this.val = val;
-
 		}
-
 	}
 
-	/*
-		思路：
-			若为空树，返回null。
-			若为非空树，对树进行中序遍历。
-				1.其中每遍历一个根节点，计算器加1，判断是否到达目标节点。
-				2.注意，每个节点都需要非空时才能返回。
-	*/
 	public class Solution {
 		int count = 0;
 
 		TreeNode KthNode(TreeNode pRoot, int k) {
+			// 	   5
+			// 	3	7
+			// 2	4	6  8
 			if (pRoot != null) {
 				TreeNode left = KthNode(pRoot.left, k);
 				if (left != null) {
 					return left;
 				}
+
 				count++;
 				if (count == k) {
 					return pRoot;

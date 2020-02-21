@@ -22,15 +22,17 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:38
- */
 public class _09AbnormalJumpSteps {
-	public static void main(String[] args) {
-		Solution1 solution5 = new _09AbnormalJumpSteps().new Solution1();
-		int result = solution5.JumpFloorII(5);
-		System.out.println(result);
+	public class Solution {
+		public int JumpFloorII(int target) {
+			// 1 2 4 8
+			int result = 1;
+			if (target == 1) return 1;
+			for (int i = 2; i <= target; i++) {
+				result = result * 2;
+			}
+			return result;
+		}
 	}
 
 	public class Solution1 {

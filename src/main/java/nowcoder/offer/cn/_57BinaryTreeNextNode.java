@@ -1,10 +1,7 @@
 //二叉树的下一个节点
+//给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:09
- */
 public class _57BinaryTreeNextNode {
 	public class TreeLinkNode {
 		int val;
@@ -17,16 +14,7 @@ public class _57BinaryTreeNextNode {
 		}
 	}
 
-	/*
-		思路：
-			1.树为空，返回null。
-			2.优先考虑右孩子，如果该节点有右孩子：
-				若右孩子还有左孩子，则返回其最左子节点。
-				若右孩子没有左孩子，则返回右孩子。
-		   3.若没有右孩子，则向上寻找，直至当前节点是其父节点的左孩子时，返回其父节点。
-		   4.否则，返回null。
-	*/
-	public class Solution {
+	public class Solution1 {
 		public TreeLinkNode GetNext(TreeLinkNode pNode) {
 			if (pNode == null) {
 				return null;

@@ -6,16 +6,32 @@
 // 2.遍历所有字符，并一边判断上一步得到的数组的元素是否为1.为1则返回该字符在String中的位置。
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:37
- */
-public class _34OnceAppearString {
-	public static void main(String[] args) {
+import java.util.HashMap;
 
+public class _34OnceAppearString {
+	public class Solution {
+		public int FirstNotRepeatingChar(String str) {
+			HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+			for (int i = 0; i < str.length(); i++) {
+				char c = str.charAt(i);
+				if (map.containsKey(c)) {
+					int time = map.get(c);
+					time++;
+					map.put(c, time);
+				} else {
+					map.put(c, 1);
+				}
+			}
+			for (int i = 0; i < str.length(); i++) {
+				char c = str.charAt(i);
+				if (map.get(c) == 1)
+					return i;
+			}
+			return -1;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public int FirstNotRepeatingChar(String str) {
 			if (str == null) {
 				return -1;

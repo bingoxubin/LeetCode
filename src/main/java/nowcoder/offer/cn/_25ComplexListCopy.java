@@ -8,15 +8,9 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:31
- */
+import java.util.HashMap;
+
 public class _25ComplexListCopy {
-	public static void main(String[] args) {
-
-	}
-
 	public class RandomListNode {
 		int label;
 		RandomListNode next = null;
@@ -28,6 +22,25 @@ public class _25ComplexListCopy {
 	}
 
 	public class Solution {
+		public RandomListNode Clone(RandomListNode pHead) {
+			if (pHead == null) return null;
+			HashMap<RandomListNode, RandomListNode> result = new HashMap();
+			RandomListNode head = pHead;
+			while (head != null) {
+				result.put(head, new RandomListNode(head.label));
+				head = head.next;
+			}
+			head = pHead;
+			while (head != null) {
+				result.get(head).next = result.get(head.next);
+				result.get(head).random = result.get(head.random);
+				head = head.next;
+			}
+			return result.get(pHead);
+		}
+	}
+
+	public class Solution1 {
 		public RandomListNode Clone(RandomListNode pHead) {
 			if (pHead == null) {
 				return null;

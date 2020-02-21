@@ -12,17 +12,8 @@
 package nowcoder.offer.cn;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:23
- */
 public class _22TopDownPrintTree {
-	public static void main(String[] args) {
-
-	}
-
 	public class TreeNode {
 		int val = 0;
 		TreeNode left = null;
@@ -35,24 +26,17 @@ public class _22TopDownPrintTree {
 
 	public class Solution {
 		public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			if (root == null) {
-				return list;
+			ArrayList<Integer> result = new ArrayList();
+			ArrayList<TreeNode> treenode = new ArrayList();
+			if (root == null) return result;
+			treenode.add(root);
+			while (treenode.size() != 0) {
+				TreeNode temp = treenode.remove(0);
+				if (temp.left != null) treenode.add(temp.left);
+				if (temp.right != null) treenode.add(temp.right);
+				result.add(temp.val);
 			}
-			LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-			queue.addLast(root);
-			TreeNode temp;
-			while (!queue.isEmpty()) {
-				temp = queue.removeFirst();
-				list.add(temp.val);
-				if (temp.left != null) {
-					queue.addLast(temp.left);
-				}
-				if (temp.right != null) {
-					queue.addLast(temp.right);
-				}
-			}
-			return list;
+			return result;
 		}
 	}
 }

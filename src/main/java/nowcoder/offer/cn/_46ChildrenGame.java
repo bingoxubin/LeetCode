@@ -12,16 +12,19 @@ package nowcoder.offer.cn;
 
 import java.util.LinkedList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 0:59
- */
 public class _46ChildrenGame {
-	public static void main(String[] args) {
-
+	public class Solution {
+		public int LastRemaining_Solution(int n, int m) {
+			if (n == 0 || m == 0) return -1;
+			int s = 0;
+			for (int i = 2; i <= n; i++) {
+				s = (s + m) % i;
+			}
+			return s;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public int LastRemaining_Solution(int n, int m) {
 			if (n <= 0 || m <= 0) {
 				return -1;

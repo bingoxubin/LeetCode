@@ -4,16 +4,15 @@
 //利用&&的短路特性代替if
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:00
- */
 public class _47GetSum {
-	public static void main(String[] args) {
-
+	public class Solution {
+		public int Sum_Solution(int n) {
+			int sum = (int) (Math.pow(n, 2) + n);
+			return sum >> 1;
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public int Sum_Solution(int n) {
 			int result = n;
 			boolean flag = result > 0 && (result += Sum_Solution(n - 1)) > 0;

@@ -7,30 +7,33 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:02
- */
 public class _14KLastNodeInList {
-	public static void main(String[] args) {
-		ListNode ln1 = new _14KLastNodeInList().new ListNode(1);
-		ListNode ln2 = new _14KLastNodeInList().new ListNode(2);
-		ListNode ln3 = new _14KLastNodeInList().new ListNode(3);
-		ListNode ln4 = new _14KLastNodeInList().new ListNode(4);
-		ln1.next = ln2;
-		ln2.next = ln3;
-		ln3.next = ln4;
-		Solution1 solution1 = new _14KLastNodeInList().new Solution1();
-		System.out.println(solution1.FindKthToTail(ln1, 2).val);
-
-	}
-
 	public class ListNode {
 		int val;
 		ListNode next = null;
 
 		ListNode(int val) {
 			this.val = val;
+		}
+	}
+
+	public class Solution {
+		public ListNode FindKthToTail(ListNode head, int k) {
+			if (head == null || k < 0) return null;
+			ListNode first = head;
+			ListNode second = head;
+			for (int i = 0; i < k; i++) {
+				if (first != null) {
+					first = first.next;
+				} else {
+					return null;
+				}
+			}
+			while (first != null) {
+				first = first.next;
+				second = second.next;
+			}
+			return second;
 		}
 	}
 

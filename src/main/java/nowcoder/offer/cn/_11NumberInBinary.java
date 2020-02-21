@@ -16,15 +16,17 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:43
- */
 public class _11NumberInBinary {
-	public static void main(String[] args) {
-		Solution1 solution1 = new _11NumberInBinary().new Solution1();
-		int result = solution1.NumberOf1(7);
-		System.out.println(result);
+	public class Solution {
+		public int NumberOf1(int n) {
+			//1010  1001        1000  0111
+			int count = 0;
+			while (n != 0) {
+				count++;
+				n = n & (n - 1);
+			}
+			return count;
+		}
 	}
 
 	public class Solution1 {

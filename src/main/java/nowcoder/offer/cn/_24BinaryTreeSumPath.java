@@ -16,15 +16,7 @@ package nowcoder.offer.cn;
 
 import java.util.ArrayList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:27
- */
 public class _24BinaryTreeSumPath {
-	public static void main(String[] args) {
-
-	}
-
 	public class TreeNode {
 		int val = 0;
 		TreeNode left = null;
@@ -36,6 +28,24 @@ public class _24BinaryTreeSumPath {
 	}
 
 	public class Solution {
+		ArrayList<ArrayList<Integer>> result = new ArrayList();
+		ArrayList<Integer> subresult = new ArrayList();
+
+		public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+			if (root == null) return result;
+			subresult.add(root.val);
+			target = target - root.val;
+			if (target == 0 && root.left == null && root.right == null) {
+				result.add(new ArrayList<Integer>(subresult));
+			}
+			FindPath(root.left, target);
+			FindPath(root.right, target);
+			subresult.remove(subresult.size() - 1);
+			return result;
+		}
+	}
+
+	public class Solution1 {
 		ArrayList<Integer> path = new ArrayList<Integer>();
 		ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
 

@@ -30,32 +30,7 @@
 
 package nowcoder.offer.cn;
 
-import java.util.HashSet;
-
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:07
- */
 public class _16JoinSortList {
-	public static void main(String[] args) {
-		ListNode ln1 = new _16JoinSortList().new ListNode(1);
-		ListNode ln3 = new _16JoinSortList().new ListNode(3);
-		ListNode ln5 = new _16JoinSortList().new ListNode(5);
-		ln1.next = ln3;
-		ln3.next = ln5;
-		ListNode ln0 = new _16JoinSortList().new ListNode(0);
-		ListNode ln2 = new _16JoinSortList().new ListNode(2);
-		ListNode ln4 = new _16JoinSortList().new ListNode(4);
-		ln0.next = ln2;
-		ln2.next = ln4;
-		Solution1 solution1 = new _16JoinSortList().new Solution1();
-		ListNode listnode = solution1.Merge(ln1, ln0);
-		while (listnode != null) {
-			System.out.print(listnode.val + " ");
-			listnode = listnode.next;
-		}
-	}
-
 	public class ListNode {
 		int val;
 		ListNode next = null;
@@ -63,6 +38,20 @@ public class _16JoinSortList {
 		ListNode(int val) {
 
 			this.val = val;
+		}
+	}
+
+	public class Solution {
+		public ListNode Merge(ListNode list1, ListNode list2) {
+			if (list1 == null) return list2;
+			if (list2 == null) return list1;
+			if (list1.val < list2.val) {
+				list1.next = Merge(list1.next, list2);
+				return list1;
+			} else {
+				list2.next = Merge(list1, list2.next);
+				return list2;
+			}
 		}
 	}
 

@@ -19,16 +19,14 @@ package nowcoder.offer.cn;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:36
- */
 public class _08JumpSteps {
-	public static void main(String[] args) {
-		Solution1 solution1 = new _08JumpSteps().new Solution1();
-		int step = solution1.JumpFloor(5);
-		System.out.println(step);
-
+	public class Solution {
+		public int JumpFloor(int target) {
+			if (target == 1) return 1;
+			if (target == 2) return 2;
+			if (target >= 3) return JumpFloor(target - 1) + JumpFloor(target - 2);
+			return -1;
+		}
 	}
 
 	public class Solution1 {

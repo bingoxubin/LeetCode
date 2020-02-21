@@ -4,18 +4,35 @@
 //思路：
 //BST的后序序列的合法序列是，对于一个序列S，最后一个元素是x （也就是根），如果去掉最后一个元素的序列为T，那么T满足：T可以分成两段，前一段（左子树）小于x，后一段（右子树）大于x。
 
+//        6
+//     4     8
+//  3    5  7   9      3547986
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/9 23:24
- */
 public class _23BinarySearchTree {
-	public static void main(String[] args) {
+	public class Solution {
+		public boolean VerifySquenceOfBST(int[] sequence) {
+			if (sequence == null || sequence.length == 0) return false;
+			return isTree(sequence, 0, sequence.length - 1);
+		}
 
+		public boolean isTree(int[] arr, int L, int R) {
+			if (L >= R) return true;
+			int index = R - 1;
+			while ((index >= L) && (arr[index] > arr[R])) {
+				index--;
+			}
+			for (int i = L; i < index; i++) {
+				if (arr[i] > arr[R]) {
+					return false;
+				}
+			}
+			return isTree(arr, L, index) && isTree(arr, index + 1, R - 1);
+
+		}
 	}
 
-	public class Solution {
+	public class Solution1 {
 		public boolean VerifySquenceOfBST(int[] sequence) {
 			if (sequence == null || sequence.length == 0) {
 				return false;

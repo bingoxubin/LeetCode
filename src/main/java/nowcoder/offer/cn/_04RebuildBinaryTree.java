@@ -20,21 +20,7 @@
 
 package nowcoder.offer.cn;
 
-import javax.swing.tree.TreeNode;
-
-/**
- * @author xumaosheng
- * @date 2019/9/9 19:21
- */
 public class _04RebuildBinaryTree {
-	public static void main(String[] args) {
-		Solution solution = new _04RebuildBinaryTree().new Solution();
-		int[] pre = {1, 2, 4, 7, 3, 5, 6, 8};
-		int[] in = {4, 7, 2, 1, 5, 3, 8, 6};
-		TreeNode tn = solution.reConstructBinaryTree(pre, in);
-		//TODO
-	}
-
 	public class TreeNode {
 		int val;
 		TreeNode left;
@@ -46,6 +32,30 @@ public class _04RebuildBinaryTree {
 	}
 
 	public class Solution {
+		public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
+			TreeNode root = reConstructBinaryTree(pre, 0, pre.length - 1, in, 0, in.length - 1);
+			return root;
+		}
+
+		private TreeNode reConstructBinaryTree(
+				int[] pre, int startPre, int endPre, int[] in, int startIn, int endIn) {
+
+			if (startPre > endPre || startIn > endIn)
+				return null;
+			TreeNode root = new TreeNode(pre[startPre]);
+
+			for (int i = startIn; i <= endIn; i++)
+				if (in[i] == pre[startPre]) {
+					root.left = reConstructBinaryTree(
+							pre, startPre + 1, startPre + i - startIn, in, startIn, i - 1);
+					root.right = reConstructBinaryTree(
+							pre, i - startIn + startPre + 1, endPre, in, i + 1, endIn);
+				}
+			return root;
+		}
+	}
+
+	public class Solution1 {
 		public TreeNode reConstructBinaryTree(int[] pre, int[] in) {
 			return reConstructBinaryTree(pre, 0, pre.length - 1, in, 0, in.length - 1);
 		}

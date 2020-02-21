@@ -14,16 +14,20 @@
 
 package nowcoder.offer.cn;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:01
- */
-public class _48DoPlus {
-	public static void main(String[] args) {
+import java.math.BigInteger;
 
-	}
+public class _48DoPlus {
 
 	public class Solution {
+		public int Add(int num1, int num2) {
+			BigInteger bi1 = new BigInteger(String.valueOf(num1));
+			BigInteger bi2 = new BigInteger(String.valueOf(num2));
+			return bi1.add(bi2).intValue();
+
+		}
+	}
+
+	public class Solution1 {
 		//递归版
 		public int Add(int num1, int num2) {
 			if (num2 == 0) {
@@ -31,17 +35,19 @@ public class _48DoPlus {
 			}
 			return Add(num1 ^ num2, (num1 & num2) << 1);
 		}
-		//非递归版
-		//public int Add(int num1,int num2){
-		// int sum,carray;
-		//while(num2!=0){
-		//  sum = num1^num2;//异或相当于相加（但不考虑进位）
-		// carray = (num1&num2)<<1;//相与并左移一位（进位）
-		//num1 = sum;
-		//num2 = carray;
-		//}
-		//return num1;
-		//}
+	}
 
+	public class Solution2 {
+		//非递归版
+		public int Add(int num1, int num2) {
+			int sum, carray;
+			while (num2 != 0) {
+				sum = num1 ^ num2;//异或相当于相加（但不考虑进位）
+				carray = (num1 & num2) << 1;//相与并左移一位（进位）
+				num1 = sum;
+				num2 = carray;
+			}
+			return num1;
+		}
 	}
 }

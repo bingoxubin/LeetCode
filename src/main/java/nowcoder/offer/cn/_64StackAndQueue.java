@@ -1,50 +1,53 @@
 //栈和队列
+//滑动窗口的最大值
+//给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，
+// 那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个：
+// {[2,3,4],2,6,2,5,1}， {2,[3,4,2],6,2,5,1}， {2,3,[4,2,6],2,5,1}， {2,3,4,[2,6,2],5,1}， {2,3,4,2,[6,2,5],1}， {2,3,4,2,6,[2,5,1]}。
 package nowcoder.offer.cn;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-/**
- * @author xumaosheng
- * @date 2019/9/10 1:19
- */
 public class _64StackAndQueue {
-	/*
-    思路：
-        1.用一个双端队列，队首保存当前窗口的最大值。
-        2.当窗口滑动一次：
-            1.判断当前最大值是否过期
-            2.新增加的值从队尾开始比较，把所有比他小的值丢掉
-        3.返回队首元素（注意从第size个开始才要返回）
-   */
 	public class Solution {
 		public ArrayList<Integer> maxInWindows(int[] num, int size) {
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			if (num == null || num.length < size || size < 1) {
-				return list;
+			ArrayList<Integer> result = new ArrayList<>();
+			if (num.length < 1 || size < 1 || num.length < size || num == null) {
+				return result;
 			}
-			//双端队列
-			ArrayDeque<Integer> deque = new ArrayDeque<Integer>();
+			//0 1 2 3 4
+			for (int i = 0; i <= num.length - size; i++) {
+				int max = 0;
+				for (int j = i; j < i + size; j++) {
+					if (num[j] > max) {
+						max = num[j];
+					}
+				}
+				result.add(max);
+			}
+			return result;
+		}
+	}
+
+	public class Solution1 {
+		public ArrayList<Integer> maxInWindows(int[] num, int size) {
+			ArrayList<Integer> result = new ArrayList();
+			if (num == null || size <= 0 || num.length < size) return result;
+			ArrayDeque<Integer> deque = new ArrayDeque();
 			for (int i = 0; i < num.length; i++) {
-				//队列为空，则直接进队其下标（初始化）
-				if (deque.isEmpty()) {
-					deque.addLast(i);
-				}
-				//判断队首（最大值的下标）是否过期(下标距离超过size)，若过期，则将其出队
-				else if (i - deque.peekFirst() + 1 > size) {
-					deque.pollFirst();
-				}
-				//当队列不为空时进行以下循环：若队尾元素小于当前元素，则出队。
-				while ((!deque.isEmpty()) && num[deque.peekLast()] <= num[i]) {
+				//2 3 4 2 6 2 5 1
+				while (!deque.isEmpty() && num[i] >= num[deque.peekLast()]) {
 					deque.pollLast();
 				}
 				deque.addLast(i);
-				//前size-1次遍历不需要返回就大值，因为还没有达到滑动窗口大小。
-				if (i - size + 1 >= 0) {
-					list.add(num[deque.peekFirst()]);
+				if (i - deque.peekFirst() + 1 > size) {
+					deque.pollFirst();
+				}
+				if (i + 1 >= size) {
+					result.add(num[deque.peekFirst()]);
 				}
 			}
-			return list;
+			return result;
 		}
 	}
 }
