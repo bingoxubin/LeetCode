@@ -57,18 +57,20 @@ public class P124BinaryTreeMaximumPathSum {
 	}
 
 	class Solution {
+		int maxSum;
+
 		public int maxPathSum(TreeNode root) {
-			return helper(root, root.val);
+			maxSum = Integer.MIN_VALUE;
+			dfs(root);
+			return maxSum;
 		}
 
-		int result = 0;
-
-		public int helper(TreeNode root, int count) {
+		public int dfs(TreeNode root) {
 			if (root == null) return 0;
-			helper(root.left, root.val + count);
-			helper(root.right, root.val + count);
-			result = Math.max(result, count);
-			return result;
+			int left = Math.max(dfs(root.left), 0);
+			int right = Math.max(dfs(root.right), 0);
+			maxSum = Math.max(left + right + root.val, maxSum);
+			return Math.max(left, right) + root.val;
 		}
 	}
 //leetcode submit region end(Prohibit modification and deletion)
