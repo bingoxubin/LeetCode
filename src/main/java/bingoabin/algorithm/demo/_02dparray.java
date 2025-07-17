@@ -7,6 +7,7 @@ package bingoabin.algorithm.demo;
 public class _02dparray {
 	public static void main(String[] args) {
 		//正向遍历dp数组
+		//test
 		int m = 10;
 		int n = 10;
 		int[][] arr = new int[m][n];
